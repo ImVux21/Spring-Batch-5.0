@@ -22,6 +22,7 @@ import org.springframework.core.task.TaskExecutor;
 import org.springframework.data.domain.Sort;
 import org.springframework.transaction.PlatformTransactionManager;
 
+import java.io.FileNotFoundException;
 import java.util.Map;
 
 @Configuration
@@ -72,6 +73,10 @@ public class ExportCustomerJobConfig {
                 .reader(reader())
                 .processor(processor())
                 .writer(writer())
+//                .faultTolerant() // enable fault tolerance to skip exceptions
+//                .skipLimit(100) // skip up to 100 exceptions
+//                .skip(Exception.class)// skip all exceptions
+//                .noSkip(FileNotFoundException.class)// do not skip FileNotFoundException
                 .taskExecutor(taskExecutor)
                 .build();
     }
